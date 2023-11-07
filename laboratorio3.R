@@ -69,6 +69,121 @@ sd(datos$Puntos)  # Desviación estándar
 
 # Imputación por la mediana en la variable "Precio"
 datos$Precio[is.na(datos$Precio)] <- median(datos$Precio, na.rm = TRUE)
+# Imputación por la mediana en la variable "Precio"
+datos$Puntos[is.na(datos$Puntos)] <- mean(datos$Puntos, na.rm = TRUE)
+
+View(datos)
+library(dplyr)
+valores<-datos %>% filter(Precio<10)
+
+#colnames(datos)<-c("Fila","Pais","Designacion","Puntos","Precio","Provincia","Region","Variedad","Bodega")
+
+#Muestra de los datos por cada categoria
+
+valores<-datos %>% group_by(Pais) %>% 
+  summarise(cantidad=n())
+ggplot(valores, aes(x = Pais, y = cantidad, fill = Pais)) +
+  geom_bar(stat = "identity") +
+  #geom_text(aes(label = scales::dollar(Precio, big.mark = ".", decimal.mark = ",", prefix = "$")),
+  #position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  ggtitle("Precio de Vinos por País") +
+  xlab("País") +
+  ylab("Precio") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+#############################################################################
+valores<-datos %>% filter(Precio<10)
+valores<-datos %>% group_by(Designacion) %>% 
+  summarise(total=sum(Precio))
+ggplot(valores, aes(x = Designacion, y = total, fill = Designacion)) +
+  geom_bar(stat = "identity") +
+  #geom_text(aes(label = scales::dollar(Precio, big.mark = ".", decimal.mark = ",", prefix = "$")),
+  #position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  ggtitle("Precio de Vinos por Designacion") +
+  xlab("Designacion") +
+  ylab("Precio") +
+  #scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+#############################################################################
+valores<-datos %>% filter(Precio<10)
+valores<-datos %>% group_by(Puntos) %>% 
+  summarise(cantidad=n())
+ggplot(valores, aes(x = Puntos, y = cantidad, fill = Puntos)) +
+  geom_bar(stat = "identity") +
+  #geom_text(aes(label = scales::dollar(Precio, big.mark = ".", decimal.mark = ",", prefix = "$")),
+  #position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  ggtitle("Precio de Vinos por Puntos") +
+  xlab("Puntos") +
+  ylab("Precio") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+#############################################################################
+valores<-datos %>% filter(Precio<10)
+valores<-datos %>% group_by(Provincia) %>% 
+  summarise(cantidad=n())
+ggplot(valores, aes(x = Provincia, y = cantidad, fill = Provincia)) +
+  geom_bar(stat = "identity") +
+  #geom_text(aes(label = scales::dollar(Precio, big.mark = ".", decimal.mark = ",", prefix = "$")),
+  #position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  ggtitle("Precio de Vinos por Provincia") +
+  xlab("Provincia") +
+  ylab("Precio") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+#############################################################################
+valores<-datos %>% filter(Precio<10)
+valores<-datos %>% group_by(Region) %>% 
+  summarise(cantidad=n())
+ggplot(valores, aes(x = Region, y = cantidad, fill = Region)) +
+  geom_bar(stat = "identity") +
+  #geom_text(aes(label = scales::dollar(Precio, big.mark = ".", decimal.mark = ",", prefix = "$")),
+  #position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  ggtitle("Precio de Vinos por Region") +
+  xlab("Region") +
+  ylab("Precio") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+#############################################################################
+valores<-datos %>% filter(Precio<10)
+valores<-datos %>% group_by(Bodega) %>% 
+  summarise(cantidad=n())
+ggplot(valores, aes(x = Bodega, y = cantidad, fill = Bodega)) +
+  geom_bar(stat = "identity") +
+  #geom_text(aes(label = scales::dollar(Precio, big.mark = ".", decimal.mark = ",", prefix = "$")),
+  #position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  ggtitle("Precio de Vinos por Bodega") +
+  xlab("Bodega") +
+  ylab("Precio") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+#############################################################################
+valores<-datos %>% filter(Precio<10)
+valores<-datos %>% group_by(Variedad) %>% 
+  summarise(cantidad=n())
+ggplot(valores, aes(x = Variedad, y = cantidad, fill = Variedad)) +
+  geom_bar(stat = "identity") +
+  #geom_text(aes(label = scales::dollar(Precio, big.mark = ".", decimal.mark = ",", prefix = "$")),
+  #position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  ggtitle("Precio de Vinos por Variedad") +
+  xlab("Variedad") +
+  ylab("Precio") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+
 
 # Este gráfico de barras mostrará la distribución de vinos por país.
 ggplot(datos, aes(x = Pais)) +
@@ -94,6 +209,7 @@ summary(datos$Precio)
 ggplot(datos, aes(x = Precio)) +
   geom_histogram(binwidth = 10, fill = "green") +
   labs(title = "Distribución de Precios de Vinos", x = "Precio", y = "Frecuencia")
+
 
 #Este análisis bivariable muestra la relación entre los puntajes y los precios de los vinos .
 ggplot(datos, aes(x = Puntos, y = Precio)) +
